@@ -7,10 +7,11 @@ const ACTIONS = {
   DELETE_DIVIDENT: "DELETE_DIVIDENT"
 }
 
-const newDivident = ({ id, name }) => {
+const newDivident = ({ id, name, color }) => {
   return {
     id: `divident-${id}`,
     name: name,
+    color: color,
     total: 0
   }
 }
@@ -29,8 +30,8 @@ const reducer = (state, action) => {
 export const DividentsContextProvider = ({ children }) => {
   const [dividents, dispatch] = useReducer(reducer, [])
 
-  const addDivident = (name) => {
-    dispatch({ type: ACTIONS.ADD_DIVIDENT, payload: { id: dividents.length + 1, name: name } })
+  const addDivident = (name, color) => {
+    dispatch({ type: ACTIONS.ADD_DIVIDENT, payload: { id: dividents.length + 1, name: name, color: color } })
   }
 
   const deleteDivident = (id) => {
