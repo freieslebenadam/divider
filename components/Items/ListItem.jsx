@@ -13,7 +13,7 @@ const ListItem = ({ item }) => {
   }
 
   return (
-    <div key={item.id} className="flex bg-neutral-50 rounded shadow text-sm animate-slide">
+    <div key={item.id} className="flex bg-neutral-50 rounded shadow text-sm animate-slide overflow-hidden">
       <button className={`relative flex-none w-5 transition-100 hover:bg-neutral-200 hover:text-neutral-400 rounded-l flex items-center justify-center text-xl text-neutral-300`} onClick={() => setDelShow(prev => !prev)} style={{width: delShow ? "2.5rem" : "auto"}}>
         <BsThreeDotsVertical />
       </button>

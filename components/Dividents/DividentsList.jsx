@@ -36,7 +36,7 @@ const DividentsList = () => {
     setShowModal(true)
     setTimeout(() => {
       document.getElementById("dividentName").focus()
-    }, 100)
+    }, 20)
   }
 
   return (
@@ -51,7 +51,7 @@ const DividentsList = () => {
             <div className="flex flex-col">
               <label className="text-xs font-semibold uppercase text-indigo-500" htmlFor="dividentName">Jméno</label>
               <input type="text" id="dividentName"
-                className="py-2 mt-1 px-4 rounded shadow text-sm focus:outline-none focus:ring-0"
+                className="py-2 mt-1 px-4 rounded shadow text-sm ring-0 outline-none transition-200 focus:shadow-lg focus:outline-none focus:ring-0 transition-100"
                 placeholder="John"
                 value={dividentName}
                 onChange={(e) => setDividentName(e.target.value)}
@@ -61,7 +61,7 @@ const DividentsList = () => {
             </div>
           </div>
           <div className="my-5">
-            <h5 className="text-md font-medium">Barva</h5>
+            <h5 className="text-xs font-semibold uppercase text-indigo-500">Barva</h5>
             <div className="grid grid-cols-5 gap-[.15rem] my-2">
               {colors.map((color) => (
                 <div key={color.id} className="h-10 rounded shadow transition-100 flex items-center justify-center hover:animate-jump cursor-pointer" onClick={() => setDividentColor(color.hex)} style={{backgroundColor: color.hex}}>

@@ -35,11 +35,11 @@ const AddItemForm = () => {
   }
 
   return (
-    <form className="flex" onSubmit={handleSubmit}>
-      <div className="flex flex-col text-[.7rem] font-semibold text-indigo-500 uppercase flex-auto">
+    <form className="flex" onSubmit={handleSubmit} className="w-full flex">
+      <div className="flex flex-col text-[.7rem] min-w-[7.5rem] font-semibold text-indigo-500 uppercase flex-auto">
         <label htmlFor="itemName" className="pl-1">Název</label>
         <input type="text" id="itemName"
-          className="text-xs text-gray-700 bg-neutral-50 rounded shadow p-2 focus:outline-none focus:ring-0"
+          className="text-xs text-neutral-700 bg-neutral-50 rounded shadow p-2 focus:outline-none focus:ring-0 outline-none ring-0 transition-200 focus:shadow-lg"
           placeholder="Položka"
           value={itemName}
           onChange={handleNameChange}
@@ -49,10 +49,10 @@ const AddItemForm = () => {
           required
         />
       </div>
-      <div className="flex flex-col text-[.7rem] font-semibold text-indigo-500 uppercase w-32 mx-2">
+      <div className="flex flex-col text-[.7rem] font-semibold text-indigo-500 uppercase min-w-[2rem] max-w-[5rem] mx-2">
         <label htmlFor="itemPrice" className="pl-1">Cena</label>
         <input type="text" id="itemPrice" 
-          className="text-xs text-gray-700 bg-neutral-50 shadow p-2 focus:outline-none focus:ring-0 rounded"
+          className="text-xs text-neutral-700 bg-neutral-50 shadow p-2 focus:outline-none focus:ring-0 rounded outline-none ring-0 transition-200 focus:shadow-lg"
           placeholder="19.99"
           value={itemPrice}
           onChange={handlePriceChange}
