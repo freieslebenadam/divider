@@ -53,7 +53,7 @@ module.exports = {
 				slide: "slideIn 200ms ease-in-out",
 				jump: "jump 200ms ease-in-out",
 				shift: "shift 200ms ease-in-out",
-        rollout: "rollOut 200ms ease-in-out",
+        rollout: "rollOut 100ms ease-in-out",
 			},
 			keyframes: {
 				fadeIn: {

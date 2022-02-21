@@ -20,7 +20,7 @@ const reducer = (state, action) => {
 
 const newItem = ({ id, name, price }) => {
   return {
-    id: `item-${id}`,
+    id: id,
     name: name,
     price: price,
     dividents: []
@@ -31,7 +31,11 @@ export const ItemsContextProvider = ({ children }) => {
   const [items, dispatch] = useReducer(reducer, [])
 
   const addNewItem = (name, price) => {
-    dispatch({ type: ACTIONS.ADD_ITEM, payload: { id: items.length + 1, name: name, price: price, } })
+    if (items.length !== 0) {
+      dispatch({ type: ACTIONS.ADD_ITEM, payload: { id: items[items.length - 1].id + 1, name: name, price: price, } })
+    } else {
+      dispatch({ type: ACTIONS.ADD_ITEM, payload: { id: 1, name: name, price: price, } })
+    }
   }
 
   const deleteItem = (id) => {

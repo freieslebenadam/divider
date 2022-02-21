@@ -4,13 +4,6 @@ import { useDividents } from "../../hooks"
 import DividentsListItem from "./DividentsListItem"
 import { TiTick } from "react-icons/ti"
 
-const dummyData = [
-  { id: 1, name: "Ondra", color: "#f43f5e" },
-  { id: 2, name: "Michal", color: "#6366f1" },
-  { id: 3, name: "Adam", color: "#10b981" },
-  { id: 4, name: "Káťa", color: "#f59e0b" },
-]
-
 const colors = [
   { id: "color-1", hex: "#ef4444", selected: false },
   { id: "color-2", hex: "#f59e0B", selected: false },
@@ -87,8 +80,8 @@ const DividentsList = () => {
       </form>
 
       <div className="flex flex-wrap gap-1">
-        {dividents.map(item => (
-          <DividentsListItem key={item.id} id={item.id} name={item.name} color={item.color} />
+        {dividents.map(divident => (
+          <DividentsListItem key={divident.id} id={divident.id} name={divident.name} color={divident.color} />
         ))}
         <button className="flex items-center text-white text-xs transition-100 hover:bg-indigo-500 bg-neutral-300 py-2 px-3 rounded shadow" onClick={focusModal}>
           <FaPlus />
