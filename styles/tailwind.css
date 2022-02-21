@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .transition-75 {
+    @apply transition-all duration-75 ease-linear;
+  }
+  .transition-100 {
+    @apply transition-all duration-100 ease-linear;
+  }
+  .transition-200 {
+    @apply transition-all duration-200 ease-linear;
+  }
+}
