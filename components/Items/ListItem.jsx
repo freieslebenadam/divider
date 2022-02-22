@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { MdGroupAdd } from "react-icons/md"
+import { MdGroupAdd, MdPerson } from "react-icons/md"
 import { BsThreeDotsVertical } from "react-icons/bs"
 import { TiTick } from "react-icons/ti"
 import { useDividents, useItems } from "../../hooks"
@@ -19,6 +19,12 @@ const ListItem = ({ item }) => {
       updateDividents(selectedItem, selectedDividents)
     }
   }, [selectedDividents])
+
+  useEffect(() => {
+    setSelectedDividents(prev => (
+      prev.filter(dividentId => dividents.find(div => div.id === dividentId))
+    ))
+  }, [dividents])
 
   const handleDelete = () => {
     deleteItem(item.id)
@@ -46,7 +52,7 @@ const ListItem = ({ item }) => {
 
   return (
     <>
-      <form style={{display: dividentsModal? "flex": "none"}} className="fixed items-center justify-center top-0 left-0 bottom-0 right-0 animate-fade">
+      <form style={{display: dividentsModal? "flex": "none"}} className="fixed items-center justify-center top-0 left-0 bottom-0 right-0 animate-fade z-10">
         <div className="absolute z-40 top-0 left-0 w-full h-full bg-dim-500" onClick={hideDividentsModal} />
         <div className="flex flex-col p-6 bg-neutral-100 rounded shadow-md z-50 min-w-[25rem]">
           <div>
@@ -81,8 +87,24 @@ const ListItem = ({ item }) => {
         <button style={{display: delShow?"block":"none"}} className="bg-red-500 rounded shadow px-2 m-1 text-[.75rem] text-red-100 transition-100 hover:bg-red-600 animate-rollout" onClick={handleDelete}>
           Odstranit
         </button>
-        <div className="flex-auto font-semibold py-3 px-2 overflow-hidden capitalize">
+        <div className="flex-none min-w-[2.5rem] font-semibold py-3 px-2 overflow-hidden capitalize">
           {item.name}
+        </div>
+        <div className="flex-auto relative py-3 px-2 overflow-hidden">
+          {item.dividents.map((dividentId, index) => {
+            // console.log("Item:",item.name,"Dividents:",item.dividents)
+            if (dividents.find(divident => divident.id === dividentId) !== null) {
+              let style = {
+                left: 0 + index * 7.5,
+                color: dividents.find(divident => divident.id === dividentId) != null ? dividents.find(divident => divident.id === dividentId).color : "transparent"
+              }
+              return (
+                <div key={dividentId} style={style} className="absolute text-lg z-1">
+                  <MdPerson />
+                </div>
+              )
+            }
+          })}
         </div>
         <div className="flex-none font-mono py-3 px-4 font-semibold text-neutral-500">
           {item.price}<span className="font-bold text-neutral-300 pl-1 text-xs select-none">Kč</span>

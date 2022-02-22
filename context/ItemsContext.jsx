@@ -5,7 +5,8 @@ export const ItemsContext = React.createContext()
 const ACTIONS = {
   ADD_ITEM: "ADD_ITEM",
   DELETE_ITEM: "DELETE_ITEM",
-  UPDATE_DIVIDENTS: "UPDATE_DIVIDENTS"
+  UPDATE_DIVIDENTS: "UPDATE_DIVIDENTS",
+  PURGE_DIVIDENT: "PURGE_DIVIDENT"
 }
 
 const reducer = (state, action) => {
@@ -18,6 +19,16 @@ const reducer = (state, action) => {
       return state.map(prev => {
         if (prev.id === action.payload.id) {
           return {...prev, dividents: action.payload.dividents}
+        } else {
+          return prev
+        }
+      })
+    case ACTIONS.PURGE_DIVIDENT:
+      return state.map(prev => {
+        if (prev.dividents.includes(action.payload.dividentId)) {
+          return {
+            ...prev, 
+            dividents: prev.dividents.filter(id => id !== action.payload.dividentId)}
         } else {
           return prev
         }
@@ -55,6 +66,10 @@ export const ItemsContextProvider = ({ children }) => {
     dispatch({ type: ACTIONS.UPDATE_DIVIDENTS, payload: { id, dividents }})
   }
 
+  const purgeDivident = (dividentId) => {
+    dispatch({ type: ACTIONS.PURGE_DIVIDENT, payload: { dividentId } })
+  }
+
   const sumTotal = () => {
     if (items.length > 0) {
       let total = 0
@@ -66,7 +81,7 @@ export const ItemsContextProvider = ({ children }) => {
   }
 
   return (
-    <ItemsContext.Provider value={{items, addNewItem, deleteItem, sumTotal, updateDividents}}>
+    <ItemsContext.Provider value={{items, addNewItem, deleteItem, sumTotal, updateDividents, purgeDivident}}>
       {children}
     </ItemsContext.Provider>
   )

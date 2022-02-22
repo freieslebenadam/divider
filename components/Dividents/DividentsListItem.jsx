@@ -1,11 +1,13 @@
 import React from "react"
 import { FaTimes } from "react-icons/fa"
-import { useDividents } from "../../hooks"
+import { useDividents, useItems } from "../../hooks"
 
 const DividentsListItem = ({ id, name, color }) => {
   const {deleteDivident} = useDividents()
+  const {items,purgeDivident} = useItems()
 
   const handleDelete = () => {
+    purgeDivident(id)
     deleteDivident(id)
   }
 

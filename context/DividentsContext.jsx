@@ -1,4 +1,5 @@
-import React, { useReducer } from "react"
+import React, { useEffect, useReducer } from "react"
+import { useItems } from "../hooks"
 
 export const DividentsContext = React.createContext()
 
@@ -29,6 +30,13 @@ const reducer = (state, action) => {
 
 export const DividentsContextProvider = ({ children }) => {
   const [dividents, dispatch] = useReducer(reducer, [])
+  const {items} = useItems()
+
+  // useEffect(() => {
+  //   items.forEach(item => {
+      
+  //   })
+  // }, [items])
 
   const addDivident = (name, color) => {
     if (dividents.length !== 0) {
