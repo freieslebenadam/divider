@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaReceipt } from 'react-icons/fa'
 import Receipt from "./Receipt"
 
@@ -13,6 +13,14 @@ const Header = () => {
     setReceiptModalOpen(false)
   }
 
+  useEffect(() => {
+    if (receiptModalOpen) {
+      document.querySelector("body").style.overflow = "hidden"
+    } else {
+      document.querySelector("body").style.overflow = "auto"
+    }
+  }, [receiptModalOpen])
+
   return (
     <>
       <Receipt 
@@ -21,7 +29,7 @@ const Header = () => {
         hideReceiptModal={hideReceiptModal} 
       />
 
-      <header className='fixed top-0 left-0 w-full h-12 bg-neutral-50 shadow'>
+      <header className='fixed top-0 left-0 w-full h-12 z-[5] bg-neutral-50 shadow'>
         <div className="container h-full flex justify-between">
           <Link href={`/`} passHref>
             <div className='flex items-center h-full cursor-pointer transition-100 group'>

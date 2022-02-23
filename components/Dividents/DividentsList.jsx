@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { FaPlus } from "react-icons/fa"
 import { useDividents } from "../../hooks"
 import DividentsListItem from "./DividentsListItem"
@@ -23,6 +23,14 @@ const DividentsList = () => {
 
   const [dividentName, setDividentName] = useState("")
   const [dividentColor, setDividentColor] = useState("#a3a3a3")
+
+  useEffect(() => {
+    if (showModal) {
+      document.querySelector("body").style.overflow = "hidden"
+    } else {
+      document.querySelector("body").style.overflow = "auto"
+    }
+  }, [showModal])
 
   const handleSubmitDivident = (e) => {
     e.preventDefault()

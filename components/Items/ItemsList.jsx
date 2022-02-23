@@ -8,10 +8,12 @@ const ItemsList = () => {
 
   const itemsCountSpelling = items.length === 1 ? "Položka" : items.length > 1 && items.length < 5 ? "Položky" : "Položek"
 
+  const sortedItems = [...items].sort((a,b) => {if (a.id > b.id) return -1 })
+
   return (
     <>
       <div className="flex flex-col gap-2 my-1">
-        {items.map(item => <ListItem key={item.id} item={{...item, price: formatPrice(item.price)}} />)}
+        {sortedItems.map(item => <ListItem key={item.id} item={{...item, price: formatPrice(item.price)}} />)}
         <div className="text-sm flex">
           <div className="font-normal px-4 py-3 flex-auto"><span className="font-bold text-indigo-500">{items.length}</span> {itemsCountSpelling}</div>
           <div className="flex-none font-mono py-3 px-4 font-semibold text-neutral-500">
