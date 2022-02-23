@@ -81,7 +81,7 @@ const DividentsList = () => {
 
       <div className="flex flex-wrap gap-1">
         {dividents.map(divident => (
-          <DividentsListItem key={divident.id} id={divident.id} name={divident.name} color={divident.color} />
+          <DividentsListItem key={divident.id} divident={divident} />
         ))}
         <button className="flex items-center text-white text-xs transition-100 hover:bg-indigo-500 bg-neutral-300 py-2 px-3 rounded shadow" onClick={focusModal}>
           <FaPlus />

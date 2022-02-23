@@ -4,11 +4,11 @@ import { ItemsContextProvider } from "./ItemsContext"
 
 const ContextProvider = ({ children }) => {
   return (
-    <ItemsContextProvider>
-        <DividentsContextProvider>
+    <DividentsContextProvider>
+      <ItemsContextProvider>
         {children}
-      </DividentsContextProvider>
-    </ItemsContextProvider>
+      </ItemsContextProvider>
+    </DividentsContextProvider>
   )
 }
 

@@ -1,4 +1,5 @@
-import React, { useReducer } from "react"
+import React, { useEffect, useReducer } from "react"
+import { useDividents } from "../hooks"
 
 export const ItemsContext = React.createContext()
 
@@ -49,6 +50,14 @@ const newItem = ({ id, name, price }) => {
 
 export const ItemsContextProvider = ({ children }) => {
   const [items, dispatch] = useReducer(reducer, [])
+
+  const {countTotals} = useDividents()
+
+  useEffect(() => {
+    if (items.length !== 0) {
+      countTotals(items)
+    }
+  }, [items])
 
   const addNewItem = (name, price) => {
     if (items.length !== 0) {
