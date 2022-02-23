@@ -1,7 +1,12 @@
 import React from 'react'
 import { FaTimes } from "react-icons/fa"
+import { useDividents } from '../hooks'
+import { formatPrice } from "../lib"
 
 const Receipt = ({ receiptModalOpen, hideReceiptModal }) => {
+  const {dividents} = useDividents()
+
+  const dividees = dividents.filter(div => div.total > 0)
 
   return (
     <div className="fixed items-center justify-center top-0 left-0 bottom-0 right-0 animate-fade z-10"
@@ -17,12 +22,27 @@ const Receipt = ({ receiptModalOpen, hideReceiptModal }) => {
             </button>
           </div>
           <div className="my-5">
-            <div className="flex flex-col">
-              <p className="text-xs font-semibold uppercase text-indigo-500">Dělitelé</p>
-            </div>
+            {dividees.length > 0 ? (
+              <div className="flex flex-col">
+                {dividees.map(divident => (
+                    <div className='flex p-2 justify-between items-center border-b-2 border-dashed border-dim-50'>
+                      <p className='text-sm font-semibold capitalize' style={{color: divident.color}}>
+                        {divident.name}
+                      </p>
+                      <p className='font-mono font-medium'>
+                        {formatPrice(divident.total)} <span className='text-dim-300 font-bold'>Kč</span>
+                      </p>
+                    </div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col">
+                <p className="text-xs font-semibold">Nikdo nic nedluží</p>
+              </div>
+            )}
           </div>
           <div className="flex gap-2">
-            <button className="flex-1 py-2 transition-100 hover:bg-indigo-400 text-sm font-semibold text-white bg-indigo-500 rounded shadow" type="button">OK</button>
+            <button className="flex-1 py-2 transition-100 hover:bg-indigo-400 text-sm font-semibold text-white bg-indigo-500 rounded shadow" type="button" onClick={hideReceiptModal}>OK</button>
           </div>
         </div>
       </div>
