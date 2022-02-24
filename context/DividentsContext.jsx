@@ -1,8 +1,10 @@
-import React, { useReducer } from "react"
+import React, { useReducer, useEffect } from "react"
+import { useLocalStorage } from "../hooks"
 
 export const DividentsContext = React.createContext()
 
 const ACTIONS = {
+  SET_DIVIDENTS: "SET_DIVIDENTS",
   ADD_DIVIDENT: "ADD_DIVIDENT",
   DELETE_DIVIDENT: "DELETE_DIVIDENT",
   UPDATE_TOTALS: "UPDATE_TOTALS",
@@ -19,6 +21,8 @@ const newDivident = ({ id, name, color }) => {
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case ACTIONS.SET_DIVIDENTS:
+      return action.payload
     case ACTIONS.ADD_DIVIDENT:
       return [ ...state, newDivident(action.payload) ]
     case ACTIONS.DELETE_DIVIDENT:
@@ -50,6 +54,16 @@ const reducer = (state, action) => {
 
 export const DividentsContextProvider = ({ children }) => {
   const [dividents, dispatch] = useReducer(reducer, [])
+
+  const [localStorageDividents, setLocalStorageDividents] = useLocalStorage("divider_dividents", [])
+
+  useEffect(() => {
+    dispatch({ type: ACTIONS.SET_DIVIDENTS, payload: localStorageDividents })
+  }, [])
+
+  useEffect(() => {
+    setLocalStorageDividents(dividents)
+  }, [dividents])
 
   const addDivident = (name, color) => {
     if (dividents.length !== 0) {

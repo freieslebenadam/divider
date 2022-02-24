@@ -1,9 +1,10 @@
 import React, { useEffect, useReducer } from "react"
-import { useDividents } from "../hooks"
+import { useLocalStorage } from "../hooks"
 
 export const ItemsContext = React.createContext()
 
 const ACTIONS = {
+  SET_ITEMS: "SET_ITEMS",
   ADD_ITEM: "ADD_ITEM",
   DELETE_ITEM: "DELETE_ITEM",
   UPDATE_DIVIDENTS: "UPDATE_DIVIDENTS",
@@ -13,6 +14,8 @@ const ACTIONS = {
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case ACTIONS.SET_ITEMS:
+      return action.payload
     case ACTIONS.ADD_ITEM:
       return [ ...state, newItem(action.payload) ]
     case ACTIONS.DELETE_ITEM:
@@ -57,14 +60,16 @@ const newItem = ({ id, name, price }) => {
 
 export const ItemsContextProvider = ({ children }) => {
   const [items, dispatch] = useReducer(reducer, [])
+  
+  const [localStorageItems, setLocalStorageItems] = useLocalStorage("divider_items", [])
 
-  // const {countTotals} = useDividents()
+  useEffect(() => {
+    dispatch({ type: ACTIONS.SET_ITEMS, payload: localStorageItems })
+  }, [])
 
-  // useEffect(() => {
-  //   if (items.length !== 0) {
-  //     countTotals(items)
-  //   }
-  // }, [items])
+  useEffect(() => {
+    setLocalStorageItems(items)
+  }, [items])
 
   const addNewItem = (name, price) => {
     if (items.length !== 0) {

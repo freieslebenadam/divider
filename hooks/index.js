@@ -1,2 +1,3 @@
 export { default as useItems } from "./useItems"
 export { default as useDividents } from "./useDividents"
+export { default as useLocalStorage } from "./useLocalStorage"
