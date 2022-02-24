@@ -2,6 +2,7 @@ import React from 'react'
 import { FaTimes } from "react-icons/fa"
 import { useDividents } from '../hooks'
 import { formatPrice } from "../lib"
+import { MdPerson } from "react-icons/md"
 
 const Receipt = ({ receiptModalOpen, hideReceiptModal }) => {
   const {dividents} = useDividents()
@@ -25,10 +26,11 @@ const Receipt = ({ receiptModalOpen, hideReceiptModal }) => {
             {dividees.length > 0 ? (
               <div className="flex flex-col">
                 {dividees.map(divident => (
-                    <div className='flex p-2 justify-between items-center border-b-2 border-dashed border-dim-50'>
-                      <p className='text-sm font-semibold capitalize' style={{color: divident.color}}>
-                        {divident.name}
-                      </p>
+                    <div key={divident.id} className='flex p-2 justify-between items-center border-b-2 border-dashed border-dim-50'>
+                      <div className='flex items-center gap-1' style={{color: divident.color}}>
+                        <div className='text-lg'><MdPerson /></div>
+                        <p className='text-sm font-bold capitalize'>{divident.name}</p>
+                      </div>
                       <p className='font-mono font-medium'>
                         {formatPrice(divident.total)} <span className='text-dim-300 font-bold'>Kč</span>
                       </p>
@@ -37,7 +39,7 @@ const Receipt = ({ receiptModalOpen, hideReceiptModal }) => {
               </div>
             ) : (
               <div className="flex flex-col">
-                <p className="text-xs font-semibold">Nikdo nic nedluží</p>
+                <p className="text-xs font-medium text-neutral-500">Nikdo nic nedluží</p>
               </div>
             )}
           </div>

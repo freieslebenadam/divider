@@ -1,13 +1,18 @@
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { FaReceipt } from 'react-icons/fa'
+import { useDividents, useItems } from '../hooks'
 import Receipt from "./Receipt"
 
 const Header = () => {
   const [receiptModalOpen, setReceiptModalOpen] = useState(false)
+  const {countTotals} = useDividents()
+  const {items} = useItems()
 
   const showReceiptModal = () => {
+    countTotals(items)
     setReceiptModalOpen(true)
+    console.log("Setting totals")
   }
   const hideReceiptModal = () => {
     setReceiptModalOpen(false)
@@ -25,7 +30,6 @@ const Header = () => {
     <>
       <Receipt 
         receiptModalOpen={receiptModalOpen} 
-        // showReceiptModal={showReceiptModal} 
         hideReceiptModal={hideReceiptModal} 
       />
 

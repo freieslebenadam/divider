@@ -7,7 +7,8 @@ const ACTIONS = {
   ADD_ITEM: "ADD_ITEM",
   DELETE_ITEM: "DELETE_ITEM",
   UPDATE_DIVIDENTS: "UPDATE_DIVIDENTS",
-  PURGE_DIVIDENT: "PURGE_DIVIDENT"
+  PURGE_DIVIDENT: "PURGE_DIVIDENT",
+  PURGE_ALL_ITEMS: "PURGE_ALL_ITEMS"
 }
 
 const reducer = (state, action) => {
@@ -15,11 +16,15 @@ const reducer = (state, action) => {
     case ACTIONS.ADD_ITEM:
       return [ ...state, newItem(action.payload) ]
     case ACTIONS.DELETE_ITEM:
-      return state.filter(item => item.id !== action.payload.id)
+      const prev = [...state]
+      return prev.filter(item => item.id !== action.payload.id)
     case ACTIONS.UPDATE_DIVIDENTS:
-      return state.map(prev => {
-        if (prev.id === action.payload.id) {
-          return {...prev, dividents: action.payload.dividents}
+      const prevState = [...state]
+      const id = action.payload.id
+      const dividents = action.payload.dividents
+      return prevState.map(prev => {
+        if (prev.id === id) {
+          return {...prev, dividents}
         } else {
           return prev
         }
@@ -34,6 +39,8 @@ const reducer = (state, action) => {
           return prev
         }
       })
+    case ACTIONS.PURGE_ALL_ITEMS:
+      return []
     default:
       throw new Error("Action not valid")
   }
@@ -51,13 +58,13 @@ const newItem = ({ id, name, price }) => {
 export const ItemsContextProvider = ({ children }) => {
   const [items, dispatch] = useReducer(reducer, [])
 
-  const {countTotals} = useDividents()
+  // const {countTotals} = useDividents()
 
-  useEffect(() => {
-    if (items.length !== 0) {
-      countTotals(items)
-    }
-  }, [items])
+  // useEffect(() => {
+  //   if (items.length !== 0) {
+  //     countTotals(items)
+  //   }
+  // }, [items])
 
   const addNewItem = (name, price) => {
     if (items.length !== 0) {
@@ -79,6 +86,10 @@ export const ItemsContextProvider = ({ children }) => {
     dispatch({ type: ACTIONS.PURGE_DIVIDENT, payload: { dividentId } })
   }
 
+  const purgeAllItems = () => {
+    dispatch({ type: ACTIONS.PURGE_ALL_ITEMS })
+  }
+
   const sumTotal = () => {
     if (items.length > 0) {
       let total = 0
@@ -90,7 +101,7 @@ export const ItemsContextProvider = ({ children }) => {
   }
 
   return (
-    <ItemsContext.Provider value={{items, addNewItem, deleteItem, sumTotal, updateDividents, purgeDivident}}>
+    <ItemsContext.Provider value={{items, addNewItem, deleteItem, sumTotal, updateDividents, purgeDivident, purgeAllItems}}>
       {children}
     </ItemsContext.Provider>
   )

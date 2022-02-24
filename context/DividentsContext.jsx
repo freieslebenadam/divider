@@ -39,6 +39,7 @@ const reducer = (state, action) => {
       })
       
       let filteredState = [...state].filter(divident => !(affectedDividents.find(div => div.id === divident.id)))
+      filteredState = filteredState.map(div => ({ ...div, total: 0 }))
       let newState = [ ...filteredState, ...affectedDividents].sort((a,b) => a.id - b.id)
 
       return newState
@@ -67,11 +68,7 @@ export const DividentsContextProvider = ({ children }) => {
   }
 
   const countTotals = (items) => {
-    const filteredItems = items.filter(item => item.dividents.length > 0)
-
-    if (dividents.length > 0 && filteredItems.length > 0) {
-      updateTotals(filteredItems)
-    }
+    updateTotals(items)
   }
 
   return (
