@@ -29,7 +29,6 @@ Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&ut
 
 # TODO
 
-- LocalStorage
 - Double check for deleting all items
 - Roll down items list for each individual divident
 - Filter items through Dividents
