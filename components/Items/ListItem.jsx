@@ -15,6 +15,12 @@ const ListItem = ({ item }) => {
   const {dividents} = useDividents()
 
   useEffect(() => {
+    if (item.dividents.length > 0) {
+      setSelectedDividents(item.dividents)
+    }
+  }, [])
+
+  useEffect(() => {
     if (dividentsModal) {
       document.querySelector("body").style.overflow = "hidden"
     } else {
