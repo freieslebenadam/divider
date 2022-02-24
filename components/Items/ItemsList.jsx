@@ -13,7 +13,6 @@ const ItemsList = () => {
   return (
     <>
       <div className="flex flex-col gap-2 my-1">
-        {sortedItems.map(item => <ListItem key={item.id} item={{...item, price: formatPrice(item.price)}} />)}
         <div className="text-sm flex">
           <div className="font-normal px-4 py-3 flex-auto"><span className="font-bold text-indigo-500">{items.length}</span> {itemsCountSpelling}</div>
           <div className="flex-none font-mono py-3 px-4 font-semibold text-neutral-500">
@@ -22,6 +21,7 @@ const ItemsList = () => {
             <span className="font-bold text-neutral-300 pl-1 text-xs select-none">Kč</span>
           </div>
         </div>
+        {sortedItems.map(item => <ListItem key={item.id} item={{...item, price: formatPrice(item.price)}} />)}
       </div>
     </>
   )

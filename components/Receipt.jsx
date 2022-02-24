@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaTimes } from "react-icons/fa"
 import { useDividents } from '../hooks'
 import { formatPrice } from "../lib"
 import { MdPerson } from "react-icons/md"
 
 const Receipt = ({ receiptModalOpen, hideReceiptModal }) => {
+  const [sumTotal, setSumTotal] = useState(0)
   const {dividents} = useDividents()
 
   const dividees = dividents.filter(div => div.total > 0)
+
+  useEffect(() => {
+    setSumTotal(0)
+    if (dividees.length !== 0) {
+      dividees.forEach(dividee => setSumTotal(prev => prev + dividee.total))
+    }
+  }, [dividees])
 
   return (
     <div className="fixed items-center justify-center top-0 left-0 bottom-0 right-0 animate-fade z-10"
@@ -42,6 +50,13 @@ const Receipt = ({ receiptModalOpen, hideReceiptModal }) => {
                 <p className="text-xs font-medium text-neutral-500">Nikdo nic nedluží</p>
               </div>
             )}
+          </div>
+          <div className="flex justify-between items-center pb-5">
+            <p className="text-neutral-400 font-medium">Celkem</p>
+            <div className="font-mono font-medium text-neutral-500">
+              <span className="text-indigo-500 font-bold">{formatPrice(sumTotal)}</span>
+              <span className="font-medium text-neutral-400 pl-2 select-none">Kč</span>
+            </div>
           </div>
           <div className="flex gap-2">
             <button className="flex-1 py-2 transition-100 hover:bg-indigo-400 text-sm font-semibold text-white bg-indigo-500 rounded shadow" type="button" onClick={hideReceiptModal}>OK</button>
