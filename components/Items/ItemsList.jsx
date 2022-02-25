@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react"
-import { useItems } from "../../hooks"
+import { useDividents, useItems } from "../../hooks"
 import ListItem from "./ListItem"
 import { formatPrice } from "../../lib"
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
+import { BsFilter } from "react-icons/bs"
+import { TiTick } from "react-icons/ti"
 
 const ItemsList = () => {
   const { items, sumTotal } = useItems()
+  const { dividents } = useDividents()
 
   const [flexibleItems, setFlexibleItems] = useState([])
 
+  // FLEXIBLE ITEMS SPLIT INTO TWO (PRIMARY IS FILTERED)
+  // const [filteredItems, setFilteredItems] = useState([])
+  // const [sortedItems, setSortedItems] = useState([])
+
   const [sortingOpen, setSortingOpen] = useState(false)
+  const [filterOpen, setFilterOpen] = useState(false)
 
   const [sorting, setSorting] = useState([
     { type: "newest", title: "Od nejnovějších", selected: true },
@@ -20,7 +28,15 @@ const ItemsList = () => {
     { type: "dividents", title: "Dle dlužitelů", selected: false }
   ])
 
+  const [filtering, setFiltering] = useState([])
+
   const itemsCountSpelling = items.length === 1 ? "Položka" : items.length > 1 && items.length < 5 ? "Položky" : "Položek"
+
+  // FILTERING LOGIC
+  // const filterItems = (items,dividents) => {
+  //   let newItems = [...items]
+
+  // }
 
   const sortItemsBy = (items,type) => {
     let newItems = [...items]
@@ -63,6 +79,13 @@ const ItemsList = () => {
       setSortingOpen(value)
     }
   }
+  const toggleFilter = (value = null) => {
+    if (typeof value !== "boolean") {
+      setFilterOpen(prev => !prev)
+    } else {
+      setFilterOpen(value)
+    }
+  }
 
   const setSortingType = (type) => {
     setSorting(prev => prev.map(pr => {
@@ -75,10 +98,50 @@ const ItemsList = () => {
     toggleSorting(false)
   }
 
+  const toggleDivident = (id) => {
+    setFiltering(prev => {
+      return prev.map(div => {
+        if (div.id === id) {
+          return { ...div, selected: !div.selected }
+        }
+        return div
+      })
+    })
+  }
+
+  useEffect(() => {
+    let existingDividents = [...dividents].map(divident => {
+      if (typeof filtering.find(div => div.id === divident.id) === "undefined") {
+        return { 
+          id: divident.id,
+          name: divident.name,
+          color: divident.color,
+          selected: true
+        }
+      } else {
+        return filtering.find(div => div.id === divident.id)
+      }
+    })
+
+    const noDivident = {
+      id: 0,
+      name: "Nepřiřazeno",
+      color: "#939393",
+      selected: true
+    }
+
+    setFiltering([...existingDividents, noDivident])
+
+  }, [dividents])
+
   useEffect(() => {
     setFlexibleItems([...items])
     setFlexibleItems(prev => sortItemsBy(prev, sorting.find(sort => sort.selected).type))
   }, [items])
+
+  useEffect(() => {
+    console.log("Filtering!")
+  }, [filtering])
 
   useEffect(() => {
     const selected = sorting.find(sort => sort.selected)
@@ -115,8 +178,31 @@ const ItemsList = () => {
             ))}
           </div>
         </div>
-        <div>
-          {/* FILTERING */}
+        <div className="w-32 relative" onMouseLeave={() => toggleFilter(false)}>
+          <button className={`bg-neutral-50 dark:bg-neutral-700 flex justify-start px-2 group items-center rounded-t ${filterOpen?"shadow-md":"shadow rounded-b"} transition-200 py-2 w-full text-xs font-medium text-neutral-500 dark:text-neutral-300`} onClick={toggleFilter}>
+            <span className="flex-auto">Filtrovat</span>
+            <span className="group-hover:text-indigo-500 dark:group-hover:text-indigo-400 text-base transition-100">
+              <BsFilter />
+            </span>
+          </button>
+          <div className="bg-neutral-50 dark:bg-neutral-700 absolute pb-3 w-full z-30 flex rounded-b shadow-md shadow-dim-200 animate-fade flex-col text-xs" style={{display: filterOpen? "flex": "none"}}>
+            {filtering.map(divident => {
+              let holder = ""
+              return (
+                <button key={divident.id} className={`text-neutral-500 dark:text-neutral-400 transition-100 py-3 capitalize font-medium flex justify-start items-center px-4`} onMouseEnter={(e) => {
+                  holder = e.target.style.color
+                  e.target.style.color = divident.color
+                }} onMouseLeave={(e) => e.target.style.color = holder} onClick={() => toggleDivident(divident.id)}>
+                  <span className="pr-1 text-base" style={{color: divident.color, opacity: divident.selected?1:0}}>
+                    <TiTick />
+                  </span>
+                  <span className="font-semibold">
+                    {divident.name}
+                  </span>
+                </button>
+              )
+            })}
+          </div>
         </div>
       </div>
       {flexibleItems.map(item => <ListItem key={item.id} item={{...item, price: formatPrice(item.price)}} />)}
