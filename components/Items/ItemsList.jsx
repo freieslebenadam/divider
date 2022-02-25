@@ -10,11 +10,8 @@ const ItemsList = () => {
   const { items, sumTotal } = useItems()
   const { dividents } = useDividents()
 
+  const [filteredItems, setFilteredItems] = useState([])
   const [flexibleItems, setFlexibleItems] = useState([])
-
-  // FLEXIBLE ITEMS SPLIT INTO TWO (PRIMARY IS FILTERED)
-  // const [filteredItems, setFilteredItems] = useState([])
-  // const [sortedItems, setSortedItems] = useState([])
 
   const [sortingOpen, setSortingOpen] = useState(false)
   const [filterOpen, setFilterOpen] = useState(false)
@@ -32,11 +29,30 @@ const ItemsList = () => {
 
   const itemsCountSpelling = items.length === 1 ? "Položka" : items.length > 1 && items.length < 5 ? "Položky" : "Položek"
 
-  // FILTERING LOGIC
-  // const filterItems = (items,dividents) => {
-  //   let newItems = [...items]
+  const filterItems = (items) => {
+    const selectedFilters = filtering.filter(fil => fil.selected).map(fil => fil.id)
 
-  // }
+    let newItemsWithDividents = [...items].filter(item => item.dividents.length > 0)
+    let newItemsWithoutDividents = [...items].filter(item => item.dividents.length === 0)
+
+    let newItems = []
+
+    newItems = newItemsWithDividents.filter(item => {
+      let passes = false
+      item.dividents.forEach(dividentId => {
+        if (selectedFilters.includes(dividentId)) {
+          passes = true
+        }
+      })
+      return passes
+    })
+
+    if (selectedFilters.includes(0)) {
+      return [ ...newItems, ...newItemsWithoutDividents ]
+    } else {
+      return newItems
+    }
+  }
 
   const sortItemsBy = (items,type) => {
     let newItems = [...items]
@@ -135,13 +151,17 @@ const ItemsList = () => {
   }, [dividents])
 
   useEffect(() => {
-    setFlexibleItems([...items])
-    setFlexibleItems(prev => sortItemsBy(prev, sorting.find(sort => sort.selected).type))
-  }, [items])
+    setFilteredItems(filterItems(items))
+  }, [filtering])
 
   useEffect(() => {
-    console.log("Filtering!")
-  }, [filtering])
+    setFlexibleItems([...filteredItems])
+    setFlexibleItems(prev => sortItemsBy(prev, sorting.find(sort => sort.selected).type))
+  }, [filteredItems])
+
+  useEffect(() => {
+    setFilteredItems(filterItems(items))
+  }, [items])
 
   useEffect(() => {
     const selected = sorting.find(sort => sort.selected)
@@ -164,7 +184,7 @@ const ItemsList = () => {
       </div>
       <div className="flex justify-between" style={{display: items.length > 0? "flex": "none"}}>
         <div className="w-36 relative" onMouseLeave={() => toggleSorting(false)}>
-          <button className={`bg-neutral-50 dark:bg-neutral-700 flex justify-start px-2 group items-center rounded-t ${sortingOpen?"shadow-md":"shadow rounded-b"} transition-200 py-2 w-full text-xs font-medium text-neutral-500 dark:text-neutral-300`} onClick={toggleSorting}>
+          <button className={`bg-neutral-50 dark:bg-neutral-700 flex justify-start px-2 group items-center rounded-t ${sortingOpen?"shadow-md":"shadow rounded-b"} transition-200 transition-bg-100 py-2 w-full text-xs font-medium text-neutral-500 dark:text-neutral-300`} onClick={toggleSorting}>
             <span className="group-hover:text-indigo-500 dark:group-hover:text-indigo-400 text-sm transition-100">
               {sortingOpen?<IoIosArrowUp/>:<IoIosArrowDown />}
             </span>
@@ -179,7 +199,7 @@ const ItemsList = () => {
           </div>
         </div>
         <div className="w-32 relative" onMouseLeave={() => toggleFilter(false)}>
-          <button className={`bg-neutral-50 dark:bg-neutral-700 flex justify-start px-2 group items-center rounded-t ${filterOpen?"shadow-md":"shadow rounded-b"} transition-200 py-2 w-full text-xs font-medium text-neutral-500 dark:text-neutral-300`} onClick={toggleFilter}>
+          <button className={`bg-neutral-50 dark:bg-neutral-700 flex justify-start px-2 group items-center rounded-t ${filterOpen?"shadow-md":"shadow rounded-b"} transition-200 transition-bg-100 py-2 w-full text-xs font-medium text-neutral-500 dark:text-neutral-300`} onClick={toggleFilter}>
             <span className="flex-auto">Filtrovat</span>
             <span className="group-hover:text-indigo-500 dark:group-hover:text-indigo-400 text-base transition-100">
               <BsFilter />
