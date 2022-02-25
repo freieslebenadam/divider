@@ -1,3 +1,4 @@
+import Head from "next/head"
 import { FaTimes } from "react-icons/fa"
 import { AddItemForm, ItemsList } from "../components"
 import { DividentsList } from "../components"
@@ -8,6 +9,10 @@ const Home = () => {
 
   return (
     <section className="container pt-4">
+      <Head>
+        <title>Squer | Divider</title>
+        <link rel="shortcut icon" href="/favicon.ico" />
+      </Head>
       <article className="p-4 bg-neutral-100 dark:bg-neutral-800 transition-bg-100 rounded shadow mb-2">
         {/* DIVIDENTI */}
         <h2 className="font-bold text-lg mb-2 pb-1 border-b border-dim-50 dark:border-lighter-50">Dělitelé</h2>
