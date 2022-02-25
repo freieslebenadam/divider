@@ -68,7 +68,7 @@ const ListItem = ({ item }) => {
     <>
       <form style={{display: dividentsModal? "flex": "none"}} className="fixed items-center justify-center top-0 left-0 bottom-0 right-0 animate-fade z-10">
         <div className="absolute z-40 top-0 left-0 w-full h-full bg-dim-500" onClick={hideDividentsModal} />
-        <div className="flex flex-col p-6 bg-neutral-100 dark:bg-neutral-700 rounded shadow-md z-50 min-w-[25rem]">
+        <div className="flex flex-col p-6 bg-neutral-100 dark:bg-neutral-700 rounded shadow-md z-50 min-w-[90%] sm:min-w-[25rem]">
           <div>
             <h4 className="font-semibold text-lg capitalize">Položka <span className="text-indigo-500 font-extrabold dark:text-indigo-400">{item.name}</span></h4>
             <p className="text-xs text-neutral-400">Tato položka stojí <span className="text-indigo-500 dark:text-indigo-400 font-medium">{item.price}</span> Kč</p>
@@ -123,10 +123,10 @@ const ListItem = ({ item }) => {
             }
           })}
         </div>
-        <div className="flex-none font-mono py-3 px-4 font-semibold text-neutral-500 dark:text-neutral-300">
+        <div className="flex-none font-mono tracking-tighter py-3 px-2 sm:px-4 font-semibold text-neutral-500 dark:text-neutral-300">
           {item.price}<span className="font-bold text-neutral-300 dark:text-neutral-500 pl-1 text-xs select-none">Kč</span>
         </div>
-        <button className="flex-none flex text-neutral-400 text-xl justify-center items-center w-14 rounded-r transition-100 hover:bg-neutral-100 hover:text-indigo-500" onClick={() => showDividentsModal(item.id)}>
+        <button className="flex-none flex text-neutral-400 text-xl justify-center items-center w-10 sm:w-14 rounded-r transition-100 hover:bg-neutral-100 hover:text-indigo-500" onClick={() => showDividentsModal(item.id)}>
           <MdGroupAdd />
         </button>
       </div>

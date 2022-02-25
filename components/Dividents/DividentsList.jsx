@@ -51,7 +51,7 @@ const DividentsList = () => {
     <>
       <form style={{display: showModal? "flex": "none"}} className="fixed items-center justify-center top-0 left-0 bottom-0 right-0 animate-fade z-10" onSubmit={handleSubmitDivident}>
         <div className="absolute z-40 top-0 left-0 w-full h-full bg-dim-500" onClick={() => setShowModal(false)} />
-        <div className="flex flex-col p-6 bg-neutral-100 dark:bg-neutral-700 transition-bg-100 rounded shadow-md z-50 min-w-[25rem]">
+        <div className="flex flex-col p-6 bg-neutral-100 dark:bg-neutral-700 transition-bg-100 rounded shadow-md z-50 min-w-[90%] sm:min-w-[25rem]">
           <div>
             <h4 className="font-bold text-lg">Přidat dělitele</h4>
           </div>

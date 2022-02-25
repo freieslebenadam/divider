@@ -22,7 +22,7 @@ const Receipt = ({ receiptModalOpen, hideReceiptModal }) => {
       style={{display: receiptModalOpen ? "flex": "none"}}>
       <div className="absolute -z-10 top-0 left-0 w-full h-full bg-dim-500" onClick={hideReceiptModal}/>
       <div className="container py-4">
-        <div className="flex flex-col p-6 bg-neutral-100 dark:bg-neutral-700 rounded shadow-md z-50 min-w-[25rem]">
+        <div className="flex flex-col p-6 bg-neutral-100 dark:bg-neutral-700 rounded shadow-md z-50 min-w-[90%] sm:min-w-[25rem]">
           <div className='flex justify-between items-center'>
             <h4 className="font-semibold text-lg">Kompletní vyúčtování</h4>
             <button className='text-xl text-neutral-400 dark:text-neutral-500 transition-100 hover:text-red-500'

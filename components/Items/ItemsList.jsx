@@ -13,11 +13,14 @@ const ItemsList = () => {
   return (
     <>
       <div className="flex flex-col gap-2 my-1">
-        <div className="text-sm flex">
-          <div className="font-normal px-4 py-3 flex-auto"><span className="font-bold text-indigo-500">{items.length}</span> {itemsCountSpelling}</div>
-          <div className="flex-none font-mono py-3 px-4 font-semibold text-neutral-500">
+        <div className="text-sm flex px-1 sm:px-4">
+          <div className="font-normal py-3 flex-auto">
+            <span className="font-bold text-indigo-500">{items.length}</span>
+            <span className="text-xs sm:text-base pl-1 dark:text-neutral-400">{itemsCountSpelling}</span>
+          </div>
+          <div className="flex-none font-mono py-3 font-semibold text-neutral-500">
             <span className="pr-2 text-xs font-sans text-neutral-400 font-normal">Celkem</span>
-            <span className="text-indigo-500">{formatPrice(sumTotal())}</span>
+            <span className="text-indigo-500 tracking-tighter">{formatPrice(sumTotal())}</span>
             <span className="font-bold text-neutral-300 dark:text-neutral-400 pl-1 text-xs select-none">Kč</span>
           </div>
         </div>
