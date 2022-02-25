@@ -17,6 +17,7 @@ const ItemsList = () => {
     { type: "name", title: "Dle názvu", selected: false },
     { type: "most_expensive", title: "Od nejdražších", selected: false },
     { type: "cheapest", title: "Od nejlevnějších", selected: false },
+    { type: "dividents", title: "Dle dlužitelů", selected: false }
   ])
 
   const itemsCountSpelling = items.length === 1 ? "Položka" : items.length > 1 && items.length < 5 ? "Položky" : "Položek"
@@ -38,6 +39,16 @@ const ItemsList = () => {
         break
       case "cheapest":
         newItems.sort((a,b) => a.price < b.price && -1)
+        break
+      case "dividents":
+        let moreThanOne = newItems.filter(item => item.dividents.length > 1)
+        let exactlyOne = newItems.filter(item => item.dividents.length === 1)
+        let none = newItems.filter(item => item.dividents.length === 0)
+
+        moreThanOne.sort((a,b) => a.dividents.length > b.dividents.length && - 1)
+        exactlyOne.sort((a,b) => a.dividents[0] > b.dividents[0] && -1)
+
+        newItems = [ ...moreThanOne, ...exactlyOne, ...none ]
         break
       default: 
         break
@@ -98,7 +109,7 @@ const ItemsList = () => {
           </button>
           <div className="bg-neutral-50 absolute pb-3 w-full z-30 flex rounded-b shadow-md animate-fade flex-col text-xs" style={{display: sortingOpen? "flex": "none"}}>
             {sorting.map((sort,index) => (
-              <button key={index} className={`text-left pl-4 ${sort.selected?"text-indigo-500":"text-neutral-500"} transition-100 py-2 hover:text-indigo-500`} onClick={() => setSortingType(sort.type)}>
+              <button key={index} className={`text-left pl-4 ${sort.selected?"text-indigo-500 font-medium":"text-neutral-500"} transition-100 py-2 hover:text-indigo-500`} onClick={() => setSortingType(sort.type)}>
                 {sort.title}
               </button>
             ))}

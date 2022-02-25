@@ -84,7 +84,10 @@ export const ItemsContextProvider = ({ children }) => {
   }
 
   const updateDividents = (id, dividents) => {
-    dispatch({ type: ACTIONS.UPDATE_DIVIDENTS, payload: { id, dividents }})
+    dispatch({ 
+      type: ACTIONS.UPDATE_DIVIDENTS, 
+      payload: { id, dividents: dividents.sort((a,b) => a-b) }
+    })
   }
 
   const purgeDivident = (dividentId) => {
