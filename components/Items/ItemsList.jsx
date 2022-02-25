@@ -88,7 +88,7 @@ const ItemsList = () => {
           <span className="font-bold text-neutral-300 dark:text-neutral-400 pl-1 text-xs select-none">Kč</span>
         </div>
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-between" style={{display: items.length > 0? "flex": "none"}}>
         <div className="w-36 relative" onMouseLeave={() => toggleSorting(false)}>
           <button className={`bg-neutral-50 flex justify-start px-2 group items-center rounded-t ${!sortingOpen&&"rounded-b"} shadow py-2 w-full text-xs font-medium text-neutral-500`} onClick={toggleSorting}>
             <span className="group-hover:text-indigo-500 text-sm transition-100">
