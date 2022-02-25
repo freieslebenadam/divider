@@ -12,4 +12,18 @@
   .transition-200 {
     @apply transition-all duration-200 ease-linear;
   }
+  .transition-background {
+    transition-property: background;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+  .transition-bg-75 {
+    @apply transition-background duration-75 ease-linear;
+  }
+  .transition-bg-100 {
+    @apply transition-background duration-100 ease-linear;
+  }
+  .transition-bg-200 {
+    @apply transition-background duration-200 ease-linear;
+  }
 }

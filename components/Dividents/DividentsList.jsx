@@ -51,15 +51,15 @@ const DividentsList = () => {
     <>
       <form style={{display: showModal? "flex": "none"}} className="fixed items-center justify-center top-0 left-0 bottom-0 right-0 animate-fade z-10" onSubmit={handleSubmitDivident}>
         <div className="absolute z-40 top-0 left-0 w-full h-full bg-dim-500" onClick={() => setShowModal(false)} />
-        <div className="flex flex-col p-6 bg-neutral-100 rounded shadow-md z-50 min-w-[25rem]">
+        <div className="flex flex-col p-6 bg-neutral-100 dark:bg-neutral-700 transition-bg-100 rounded shadow-md z-50 min-w-[25rem]">
           <div>
             <h4 className="font-bold text-lg">Přidat dělitele</h4>
           </div>
           <div className="my-2">
             <div className="flex flex-col">
-              <label className="text-xs font-semibold uppercase text-indigo-500" htmlFor="dividentName">Jméno</label>
+              <label className="text-xs font-semibold uppercase text-indigo-500 dark:text-indigo-400" htmlFor="dividentName">Jméno</label>
               <input type="text" id="dividentName"
-                className="py-2 mt-1 px-4 rounded shadow text-sm ring-0 outline-none transition-200 focus:shadow-lg focus:outline-none focus:ring-0 transition-100"
+                className="py-2 mt-1 px-4 rounded shadow text-sm ring-0 outline-none transition-200 focus:shadow-lg focus:outline-none focus:ring-0 dark:bg-neutral-600"
                 placeholder="John"
                 value={dividentName}
                 onChange={(e) => setDividentName(e.target.value)}
@@ -69,8 +69,8 @@ const DividentsList = () => {
             </div>
           </div>
           <div className="my-5">
-            <h5 className="text-xs font-semibold uppercase text-indigo-500">Barva</h5>
-            <div className="grid grid-cols-5 gap-[.15rem] my-2">
+            <h5 className="text-xs font-semibold uppercase text-indigo-500 dark:text-indigo-400">Barva</h5>
+            <div className="grid grid-cols-5 gap-1 my-2">
               {colors.map((color) => (
                 <div key={color.id} className="h-10 rounded shadow transition-100 flex items-center justify-center hover:animate-jump cursor-pointer" onClick={() => setDividentColor(color.hex)} style={{backgroundColor: color.hex}}>
                   <div style={{color: color.hex, display: dividentColor === color.hex ? "inline-block" : "none"}} className="bg-lighter-600 p-2 rounded-full animate-fade">
@@ -91,7 +91,7 @@ const DividentsList = () => {
         {dividents.map(divident => (
           <DividentsListItem key={divident.id} divident={divident} />
         ))}
-        <button className="flex items-center text-white text-xs transition-100 hover:bg-indigo-500 bg-neutral-300 py-2 px-3 rounded shadow" onClick={focusModal}>
+        <button className="flex items-center text-white text-xs transition-100 hover:bg-indigo-500 bg-neutral-300 dark:bg-neutral-500 dark:hover:bg-indigo-500 py-2 px-3 rounded shadow transition-bg-100" onClick={focusModal}>
           <FaPlus />
         </button>
       </div>

@@ -18,7 +18,7 @@ const ItemsList = () => {
           <div className="flex-none font-mono py-3 px-4 font-semibold text-neutral-500">
             <span className="pr-2 text-xs font-sans text-neutral-400 font-normal">Celkem</span>
             <span className="text-indigo-500">{formatPrice(sumTotal())}</span>
-            <span className="font-bold text-neutral-300 pl-1 text-xs select-none">Kč</span>
+            <span className="font-bold text-neutral-300 dark:text-neutral-400 pl-1 text-xs select-none">Kč</span>
           </div>
         </div>
         {sortedItems.map(item => <ListItem key={item.id} item={{...item, price: formatPrice(item.price)}} />)}

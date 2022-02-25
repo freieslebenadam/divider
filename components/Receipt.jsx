@@ -22,10 +22,10 @@ const Receipt = ({ receiptModalOpen, hideReceiptModal }) => {
       style={{display: receiptModalOpen ? "flex": "none"}}>
       <div className="absolute -z-10 top-0 left-0 w-full h-full bg-dim-500" onClick={hideReceiptModal}/>
       <div className="container py-4">
-        <div className="flex flex-col p-6 bg-neutral-100 rounded shadow-md z-50 min-w-[25rem]">
+        <div className="flex flex-col p-6 bg-neutral-100 dark:bg-neutral-700 rounded shadow-md z-50 min-w-[25rem]">
           <div className='flex justify-between items-center'>
             <h4 className="font-semibold text-lg">Kompletní vyúčtování</h4>
-            <button className='text-xl text-neutral-400 transition-100 hover:text-red-500'
+            <button className='text-xl text-neutral-400 dark:text-neutral-500 transition-100 hover:text-red-500'
               onClick={hideReceiptModal}>
               <FaTimes />
             </button>
@@ -34,13 +34,13 @@ const Receipt = ({ receiptModalOpen, hideReceiptModal }) => {
             {dividees.length > 0 ? (
               <div className="flex flex-col">
                 {dividees.map(divident => (
-                    <div key={divident.id} className='flex p-2 justify-between items-center border-b-2 border-dashed border-dim-50'>
+                    <div key={divident.id} className='flex p-2 justify-between items-center border-b-2 border-dashed border-dim-50 dark:border-lighter-50'>
                       <div className='flex items-center gap-1' style={{color: divident.color}}>
                         <div className='text-lg'><MdPerson /></div>
                         <p className='text-sm font-bold capitalize'>{divident.name}</p>
                       </div>
-                      <p className='font-mono font-medium'>
-                        {formatPrice(divident.total)} <span className='text-dim-300 font-bold'>Kč</span>
+                      <p className='font-mono font-medium tracking-tighter'>
+                        {formatPrice(divident.total)} <span className='text-dim-300 font-bold dark:text-lighter-300'>Kč</span>
                       </p>
                     </div>
                 ))}
@@ -54,7 +54,7 @@ const Receipt = ({ receiptModalOpen, hideReceiptModal }) => {
           <div className="flex justify-between items-center pb-5">
             <p className="text-neutral-400 font-medium">Celkem</p>
             <div className="font-mono font-medium text-neutral-500">
-              <span className="text-indigo-500 font-bold">{formatPrice(sumTotal)}</span>
+              <span className="text-indigo-500 dark:text-indigo-400 font-bold">{formatPrice(sumTotal)}</span>
               <span className="font-medium text-neutral-400 pl-2 select-none">Kč</span>
             </div>
           </div>

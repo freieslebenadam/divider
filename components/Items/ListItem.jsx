@@ -68,14 +68,14 @@ const ListItem = ({ item }) => {
     <>
       <form style={{display: dividentsModal? "flex": "none"}} className="fixed items-center justify-center top-0 left-0 bottom-0 right-0 animate-fade z-10">
         <div className="absolute z-40 top-0 left-0 w-full h-full bg-dim-500" onClick={hideDividentsModal} />
-        <div className="flex flex-col p-6 bg-neutral-100 rounded shadow-md z-50 min-w-[25rem]">
+        <div className="flex flex-col p-6 bg-neutral-100 dark:bg-neutral-700 rounded shadow-md z-50 min-w-[25rem]">
           <div>
-            <h4 className="font-semibold text-lg capitalize">Položka <span className="text-indigo-500 font-extrabold">{item.name}</span></h4>
-            <p className="text-xs text-neutral-400">Tato položka stojí <span className="text-indigo-500 font-medium">{item.price}</span> Kč</p>
+            <h4 className="font-semibold text-lg capitalize">Položka <span className="text-indigo-500 font-extrabold dark:text-indigo-400">{item.name}</span></h4>
+            <p className="text-xs text-neutral-400">Tato položka stojí <span className="text-indigo-500 dark:text-indigo-400 font-medium">{item.price}</span> Kč</p>
           </div>
           <div className="my-5">
             <div className="flex flex-col">
-              <label className="text-xs font-semibold uppercase text-indigo-500" htmlFor="dividentsSelect">Přidělit dělitele</label>
+              <label className="text-xs font-semibold uppercase text-indigo-500 dark:text-indigo-400" htmlFor="dividentsSelect">Přidělit dělitele</label>
               <div id="dividentsSelect" className="flex flex-col gap-2 py-2">
                 {dividents.length === 0 && (
                   <p className="text-sm font-medium text-neutral-500">Žádní dělitelé</p>
@@ -97,8 +97,8 @@ const ListItem = ({ item }) => {
         </div>
       </form>
 
-      <div key={item.id} className="flex bg-neutral-50 rounded shadow text-sm animate-slide overflow-hidden">
-        <button className={`relative flex-none w-5 transition-100 hover:bg-neutral-200 hover:text-neutral-400 rounded-l flex items-center justify-center text-xl text-neutral-300`} onClick={() => setDelShow(prev => !prev)} style={{width: delShow ? "2.5rem" : "auto"}}>
+      <div key={item.id} className="flex bg-neutral-50 dark:bg-neutral-700 transition-bg-100 rounded shadow text-sm animate-slide overflow-hidden">
+        <button className={`relative flex-none w-5 transition-100 hover:bg-neutral-200 dark:hover:bg-neutral-600 hover:text-neutral-400 rounded-l flex items-center justify-center text-xl text-neutral-300`} onClick={() => setDelShow(prev => !prev)} style={{width: delShow ? "2.5rem" : "auto"}}>
           <BsThreeDotsVertical />
         </button>
         <button style={{display: delShow?"block":"none"}} className="bg-red-500 rounded shadow px-2 m-1 text-[.75rem] text-red-100 transition-100 hover:bg-red-600 animate-rollout" onClick={handleDelete}>
@@ -123,8 +123,8 @@ const ListItem = ({ item }) => {
             }
           })}
         </div>
-        <div className="flex-none font-mono py-3 px-4 font-semibold text-neutral-500">
-          {item.price}<span className="font-bold text-neutral-300 pl-1 text-xs select-none">Kč</span>
+        <div className="flex-none font-mono py-3 px-4 font-semibold text-neutral-500 dark:text-neutral-300">
+          {item.price}<span className="font-bold text-neutral-300 dark:text-neutral-500 pl-1 text-xs select-none">Kč</span>
         </div>
         <button className="flex-none flex text-neutral-400 text-xl justify-center items-center w-14 rounded-r transition-100 hover:bg-neutral-100 hover:text-indigo-500" onClick={() => showDividentsModal(item.id)}>
           <MdGroupAdd />
