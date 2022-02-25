@@ -101,15 +101,15 @@ const ItemsList = () => {
       </div>
       <div className="flex justify-between" style={{display: items.length > 0? "flex": "none"}}>
         <div className="w-36 relative" onMouseLeave={() => toggleSorting(false)}>
-          <button className={`bg-neutral-50 flex justify-start px-2 group items-center rounded-t ${!sortingOpen&&"rounded-b"} shadow py-2 w-full text-xs font-medium text-neutral-500`} onClick={toggleSorting}>
-            <span className="group-hover:text-indigo-500 text-sm transition-100">
+          <button className={`bg-neutral-50 dark:bg-neutral-700 flex justify-start px-2 group items-center rounded-t ${sortingOpen?"shadow-md":"shadow rounded-b"} transition-200 py-2 w-full text-xs font-medium text-neutral-500 dark:text-neutral-300`} onClick={toggleSorting}>
+            <span className="group-hover:text-indigo-500 dark:group-hover:text-indigo-400 text-sm transition-100">
               {sortingOpen?<IoIosArrowUp/>:<IoIosArrowDown />}
             </span>
             <span className="flex-auto">{sorting.find(sort => sort.selected).title}</span>
           </button>
-          <div className="bg-neutral-50 absolute pb-3 w-full z-30 flex rounded-b shadow-md animate-fade flex-col text-xs" style={{display: sortingOpen? "flex": "none"}}>
+          <div className="bg-neutral-50 dark:bg-neutral-700 absolute pb-3 w-full z-30 flex rounded-b shadow-md shadow-dim-200 animate-fade flex-col text-xs" style={{display: sortingOpen? "flex": "none"}}>
             {sorting.map((sort,index) => (
-              <button key={index} className={`text-left pl-4 ${sort.selected?"text-indigo-500 font-medium":"text-neutral-500"} transition-100 py-2 hover:text-indigo-500`} onClick={() => setSortingType(sort.type)}>
+              <button key={index} className={`text-left pl-4 ${sort.selected?"text-indigo-500 dark:text-indigo-400 font-medium":"text-neutral-500 dark:text-neutral-400"} transition-100 py-2 hover:text-indigo-500 dark:hover:text-indigo-400`} onClick={() => setSortingType(sort.type)}>
                 {sort.title}
               </button>
             ))}
