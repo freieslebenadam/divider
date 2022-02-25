@@ -77,6 +77,9 @@ const ListItem = ({ item }) => {
             <div className="flex flex-col">
               <label className="text-xs font-semibold uppercase text-indigo-500" htmlFor="dividentsSelect">Přidělit dělitele</label>
               <div id="dividentsSelect" className="flex flex-col gap-2 py-2">
+                {dividents.length === 0 && (
+                  <p className="text-sm font-medium text-neutral-500">Žádní dělitelé</p>
+                )}
                 {dividents.map(divident => (
                   <button key={divident.id} type="button" className="flex items-center text-lighter-800 text-sm p-2 rounded shadow animate-fade transition-100" style={{backgroundColor: divident.color}} onClick={() => toggleDividentSelection(divident.id)}>
                     <div className="bg-lighter-800 p-2 rounded-full animate-fade" style={{display: selectedDividents.includes(divident.id)? "inline-block": "none",color: divident.color}}>
