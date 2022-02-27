@@ -8,7 +8,7 @@ const ThemeSwitch = () => {
   const themeIcon = darkMode ? <FiMoon /> : <FiSun />
 
   return (
-    <button onClick={toggleDarkMode} className="flex items-center justify-center w-8 h-8 hover:bg-lighter-300 dark:hover:bg-lighter-100 rounded-full text-dim-500 dark:text-lighter-500 transition-100 hover:text-dim-900 hover:shadow-md dark:hover:text-lighter-900 active:scale-95">
+    <button onClick={toggleDarkMode} className="flex items-center justify-center w-8 h-8 hover:bg-lighter-300 dark:hover:bg-lighter-100 rounded-full text-dim-500 dark:text-lighter-500 transition-100 hover:text-dim-900 hover:shadow-md dark:hover:text-lighter-900 active:scale-95" aria-label="Switch theme">
       {themeIcon}
     </button>
   )

@@ -43,7 +43,7 @@ const AddItemForm = () => {
           placeholder="Položka"
           value={itemName}
           onChange={handleNameChange}
-          tabIndex={1}
+          tabIndex={0}
           spellCheck="false"
           autoComplete="off"
           required
@@ -56,7 +56,7 @@ const AddItemForm = () => {
           placeholder="19.99"
           value={itemPrice}
           onChange={handlePriceChange}
-          tabIndex={2}
+          tabIndex={0}
           spellCheck="false"
           autoComplete="off"
           required
@@ -65,7 +65,7 @@ const AddItemForm = () => {
       </div>
       <div className="flex flex-col text-[.7rem] font-semibold text-transparent uppercase flex-none">
         <div className="">Potvrdit</div>
-        <button className="py-2 px-4 rounded shadow text-center text-xs font-semibold text-neutral-50 bg-indigo-500 focus:outline-none focus:scale-105 focus:shadow-md focus:shadow-indigo-300 active:scale-100 transition-100 hover:bg-indigo-400" type="submit" tabIndex={3}>Přidat</button>
+        <button className="py-2 px-4 rounded shadow text-center text-xs font-semibold text-neutral-50 bg-indigo-500 focus:outline-none focus:scale-105 focus:shadow-md focus:shadow-indigo-300 active:scale-100 transition-100 hover:bg-indigo-400" type="submit" tabIndex={0}>Přidat</button>
       </div>
     </form>
   )

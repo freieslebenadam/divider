@@ -91,7 +91,7 @@ const DividentsList = () => {
         {dividents.map(divident => (
           <DividentsListItem key={divident.id} divident={divident} />
         ))}
-        <button className="flex items-center text-white text-xs transition-100 hover:bg-indigo-500 bg-neutral-300 dark:bg-neutral-500 dark:hover:bg-indigo-500 py-2 px-3 rounded shadow transition-bg-100" onClick={focusModal}>
+        <button className="flex items-center text-white text-xs transition-100 hover:bg-indigo-500 bg-neutral-300 dark:bg-neutral-500 dark:hover:bg-indigo-500 py-2 px-3 rounded shadow transition-bg-100" onClick={focusModal} aria-label="Add divident">
           <FaPlus />
         </button>
       </div>

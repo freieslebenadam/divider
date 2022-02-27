@@ -47,7 +47,7 @@ const Header = () => {
             <ThemeSwitch />
           </div>
           <div className='flex items-center flex-none'>
-            <button className='text-xl text-neutral-400 transition-100 hover:text-indigo-500 cursor-pointer' onClick={showReceiptModal}>
+            <button className='text-xl text-neutral-400 transition-100 hover:text-indigo-500 cursor-pointer' onClick={showReceiptModal} aria-label="Open full receipt">
               <FaReceipt />
             </button>
           </div>
