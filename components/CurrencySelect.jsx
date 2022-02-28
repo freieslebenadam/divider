@@ -17,7 +17,7 @@ const CurrencySelect = () => {
 
   return (
     <div className='relative' onMouseLeave={() => toggleCurrency(false)}>
-      <button className={`px-2 py-1 text-[.55rem] font-medium rounded-t ${!currencyOpen&&"rounded-b"} shadow bg-neutral-100 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 flex items-center gap-1 pr-3`} onClick={toggleCurrency}>
+      <button className={`px-2 py-1 text-[.55rem] font-medium rounded-t ${!currencyOpen&&"rounded-b"} shadow bg-neutral-100 dark:bg-neutral-700 text-neutral-500 transition-bg-100 dark:text-neutral-300 flex items-center gap-1 pr-3`} onClick={toggleCurrency}>
         <span>
           {currencyOpen?<IoIosArrowUp />:<IoIosArrowDown />}
         </span>

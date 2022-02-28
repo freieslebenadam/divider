@@ -5,6 +5,15 @@ html {
   overflow-y: overlay;
 }
 
+html.light body {
+  color: rgb(64 64 64);
+  background-color: rgb(229 229 229);
+}
+html.dark body{
+  color: rgb(229 229 229);
+  background-color: rgb(23 23 23);
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }

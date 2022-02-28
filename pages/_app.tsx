@@ -11,6 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Layout>
         <Head>
           <meta name="description" content="Rozpočítávání účtů během pár kliknutí. Přidejte položky z účtu, přiřaďte dělitele a je to." />
+          <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1' />
         </Head>
         <Component {...pageProps} />
       </Layout>
