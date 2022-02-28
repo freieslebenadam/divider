@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useDividents, useItems } from "../../hooks"
+import { useDividents, useItems, useLocale } from "../../hooks"
 import ListItem from "./ListItem"
 import { formatPrice } from "../../lib"
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
@@ -10,6 +10,8 @@ const ItemsList = () => {
   const { items, sumTotal } = useItems()
   const { dividents } = useDividents()
 
+  const {t} = useLocale()
+
   const [filteredItems, setFilteredItems] = useState([])
   const [flexibleItems, setFlexibleItems] = useState([])
 
@@ -17,17 +19,17 @@ const ItemsList = () => {
   const [filterOpen, setFilterOpen] = useState(false)
 
   const [sorting, setSorting] = useState([
-    { type: "newest", title: "Od nejnovějších", selected: true },
-    { type: "oldest", title: "Od nejstarších", selected: false },
-    { type: "name", title: "Dle názvu", selected: false },
-    { type: "most_expensive", title: "Od nejdražších", selected: false },
-    { type: "cheapest", title: "Od nejlevnějších", selected: false },
-    { type: "dividents", title: "Dle dlužitelů", selected: false }
+    { type: "newest", title: t.items.list.sorting.newest, selected: true },
+    { type: "oldest", title: t.items.list.sorting.oldest, selected: false },
+    { type: "name", title: t.items.list.sorting.name, selected: false },
+    { type: "most_expensive", title: t.items.list.sorting.most_expensive, selected: false },
+    { type: "cheapest", title: t.items.list.sorting.cheapest, selected: false },
+    { type: "dividents", title: t.items.list.sorting.dividents, selected: false }
   ])
 
   const [filtering, setFiltering] = useState([])
 
-  const itemsCountSpelling = items.length === 1 ? "Položka" : items.length > 1 && items.length < 5 ? "Položky" : "Položek"
+  const itemsCountSpelling = items.length === 1 ? t.items.list.items_count.one : items.length > 1 && items.length < 5 ? t.items.list.items_count.special : t.items.list.items_count.rest
 
   const filterItems = (items) => {
     const selectedFilters = filtering.filter(fil => fil.selected).map(fil => fil.id)
@@ -141,7 +143,7 @@ const ItemsList = () => {
 
     const noDivident = {
       id: 0,
-      name: "Nepřiřazeno",
+      name: t.items.list.filtering.non_asigned,
       color: "#939393",
       selected: true
     }
@@ -177,9 +179,9 @@ const ItemsList = () => {
           <span className="text-xs sm:text-base pl-1 dark:text-neutral-400">{itemsCountSpelling}</span>
         </div>
         <div className="flex-none font-mono py-3 font-semibold text-neutral-500">
-          <span className="pr-2 text-xs font-sans text-neutral-400 font-normal">Celkem</span>
+          <span className="pr-2 text-xs font-sans text-neutral-400 font-normal">{t.items.list.items_price_sum}</span>
           <span className="text-indigo-500 tracking-tighter">{formatPrice(sumTotal())}</span>
-          <span className="font-bold text-neutral-300 dark:text-neutral-400 pl-1 text-xs select-none">Kč</span>
+          <span className="font-bold text-neutral-300 dark:text-neutral-400 pl-1 text-xs select-none">{t.currency}</span>
         </div>
       </div>
       <div className="flex justify-between" style={{display: items.length > 0? "flex": "none"}}>
@@ -200,7 +202,7 @@ const ItemsList = () => {
         </div>
         <div className="w-32 relative" onMouseLeave={() => toggleFilter(false)}>
           <button className={`bg-neutral-50 dark:bg-neutral-700 flex justify-start px-2 group items-center rounded-t ${filterOpen?"shadow-md":"shadow rounded-b"} transition-200 transition-bg-100 py-2 w-full text-xs font-medium text-neutral-500 dark:text-neutral-300`} onClick={toggleFilter}>
-            <span className="flex-auto">Filtrovat</span>
+            <span className="flex-auto">{t.items.list.filtering.title}</span>
             <span className="group-hover:text-indigo-500 dark:group-hover:text-indigo-400 text-base transition-100">
               <BsFilter />
             </span>

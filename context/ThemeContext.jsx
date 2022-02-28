@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react"
 const ThemeContext = React.createContext()
 
 const ThemeContextProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(true)
+  const [darkMode, setDarkMode] = useState(false)
 
   // When "darkMode" changes, update document based on Local Storage "theme" variable
   useEffect(() => {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { MdGroupAdd, MdPerson } from "react-icons/md"
 import { BsThreeDotsVertical } from "react-icons/bs"
 import { TiTick } from "react-icons/ti"
-import { useDividents, useItems } from "../../hooks"
+import { useDividents, useItems, useLocale } from "../../hooks"
 
 const ListItem = ({ item }) => {
   const [delShow, setDelShow] = useState(false)
@@ -13,6 +13,8 @@ const ListItem = ({ item }) => {
   
   const {deleteItem, updateDividents} = useItems()
   const {dividents} = useDividents()
+
+  const {t} = useLocale()
 
   useEffect(() => {
     if (item.dividents.length > 0) {
@@ -70,15 +72,15 @@ const ListItem = ({ item }) => {
         <div className="absolute z-40 top-0 left-0 w-full h-full bg-dim-500" onClick={hideDividentsModal} />
         <div className="flex flex-col p-6 bg-neutral-100 dark:bg-neutral-700 rounded shadow-md z-50 min-w-[90%] sm:min-w-[25rem]">
           <div>
-            <h4 className="font-semibold text-lg capitalize">Položka <span className="text-indigo-500 font-extrabold dark:text-indigo-400">{item.name}</span></h4>
-            <p className="text-xs text-neutral-400">Tato položka stojí <span className="text-indigo-500 dark:text-indigo-400 font-medium">{item.price}</span> Kč</p>
+            <h4 className="font-semibold text-lg capitalize">{t.items.list.item.add_dividents_modal.title} <span className="text-indigo-500 font-extrabold dark:text-indigo-400">{item.name}</span></h4>
+            <p className="text-xs text-neutral-400">{t.items.list.item.add_dividents_modal.subtitle} <span className="text-indigo-500 dark:text-indigo-400 font-medium">{item.price}</span> {t.currency}</p>
           </div>
           <div className="my-5">
             <div className="flex flex-col">
-              <label className="text-xs font-semibold uppercase text-indigo-500 dark:text-indigo-400" htmlFor="dividentsSelect">Přidělit dělitele</label>
+              <label className="text-xs font-semibold uppercase text-indigo-500 dark:text-indigo-400" htmlFor="dividentsSelect">{t.items.list.item.add_dividents_modal.dividents_label}</label>
               <div id="dividentsSelect" className="flex flex-col gap-2 py-2">
                 {dividents.length === 0 && (
-                  <p className="text-sm font-medium text-neutral-500">Žádní dělitelé</p>
+                  <p className="text-sm font-medium text-neutral-500">{t.items.list.item.add_dividents_modal.no_dividents}</p>
                 )}
                 {dividents.map(divident => (
                   <button key={divident.id} type="button" className="flex items-center text-lighter-800 text-sm p-2 rounded shadow animate-fade transition-100" style={{backgroundColor: divident.color}} onClick={() => toggleDividentSelection(divident.id)}>
@@ -92,7 +94,7 @@ const ListItem = ({ item }) => {
             </div>
           </div>
           <div className="flex gap-2">
-            <button className="flex-1 py-2 transition-100 hover:bg-indigo-400 text-sm font-semibold text-white bg-indigo-500 rounded shadow" type="button" onClick={hideDividentsModal}>OK</button>
+            <button className="flex-1 py-2 transition-100 hover:bg-indigo-400 text-sm font-semibold text-white bg-indigo-500 rounded shadow uppercase" type="button" onClick={hideDividentsModal}>{t.items.list.item.add_dividents_modal.button_ok}</button>
           </div>
         </div>
       </form>
@@ -124,7 +126,7 @@ const ListItem = ({ item }) => {
           })}
         </div>
         <div className="flex-none font-mono tracking-tighter py-3 px-2 sm:px-4 font-semibold text-neutral-500 dark:text-neutral-300">
-          {item.price}<span className="font-bold text-neutral-300 dark:text-neutral-500 pl-1 text-xs select-none">Kč</span>
+          {item.price}<span className="font-bold text-neutral-300 dark:text-neutral-500 pl-1 text-xs select-none">{t.currency}</span>
         </div>
         <button className="flex-none flex text-neutral-400 text-xl justify-center items-center w-10 sm:w-14 rounded-r transition-100 hover:bg-neutral-100 hover:text-indigo-500" onClick={() => showDividentsModal(item.id)}>
           <MdGroupAdd />
