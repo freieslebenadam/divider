@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useDividents, useItems, useLocale } from "../../hooks"
+import { useCurrency, useDividents, useItems, useLocale } from "../../hooks"
 import ListItem from "./ListItem"
 import { formatPrice } from "../../lib"
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
@@ -11,6 +11,7 @@ const ItemsList = () => {
   const { dividents } = useDividents()
 
   const {t} = useLocale()
+  const {currency} = useCurrency()
 
   const [filteredItems, setFilteredItems] = useState([])
   const [flexibleItems, setFlexibleItems] = useState([])
@@ -181,7 +182,7 @@ const ItemsList = () => {
         <div className="flex-none font-mono py-3 font-semibold text-neutral-500">
           <span className="pr-2 text-xs font-sans text-neutral-400 font-normal">{t.items.list.items_price_sum}</span>
           <span className="text-indigo-500 tracking-tighter">{formatPrice(sumTotal())}</span>
-          <span className="font-bold text-neutral-300 dark:text-neutral-400 pl-1 text-xs select-none">{t.currency}</span>
+          <span className="font-bold text-neutral-300 dark:text-neutral-400 pl-1 text-xs select-none">{currency.symbol}</span>
         </div>
       </div>
       <div className="flex justify-between" style={{display: items.length > 0? "flex": "none"}}>

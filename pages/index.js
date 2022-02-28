@@ -4,15 +4,18 @@ import { useRouter } from "next/router"
 import { FaTimes } from "react-icons/fa"
 import { AddItemForm, ItemsList } from "../components"
 import { DividentsList } from "../components"
-import { useItems, useLocale } from "../hooks"
+import { useCurrency, useItems, useLocale, useLocalStorage } from "../hooks"
+import { useEffect } from "react"
 
 const Home = () => {
   const [confirmDeleteModal, setConfirmDeleteModal] = useState(false)
   const {purgeAllItems} = useItems()
 
+  const [localStorageCurrency, setLocalStorageCurrency] = useLocalStorage("currency", null)
+
   const { locale } = useRouter()
   const {t, setLocaleTo} = useLocale()
-  setLocaleTo(locale)
+  const {currencies, setCurrencyTo} = useCurrency()
 
   const openConfirmDelete = () => {
     setConfirmDeleteModal(true)
@@ -26,6 +29,23 @@ const Home = () => {
     purgeAllItems()
     closeConfirmDelete()
   }
+
+  useEffect(() => {
+    setLocaleTo(locale)
+
+    if (localStorageCurrency === null) {
+      switch (locale) {
+        case "en":
+          setCurrencyTo(currencies.find(cur => cur.name === "EUR").id)
+          break
+        case "cs":
+          setCurrencyTo(currencies.find(cur => cur.name === "CZK").id)
+          break
+      }
+    } else {
+      setCurrencyTo(localStorageCurrency)
+    }
+  }, [])
 
   return (
     <section className="container pt-4 lg:flex lg: lg:flex-row-reverse lg:justify-between lg:gap-4">

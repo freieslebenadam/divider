@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { MdGroupAdd, MdPerson } from "react-icons/md"
 import { BsThreeDotsVertical } from "react-icons/bs"
 import { TiTick } from "react-icons/ti"
-import { useDividents, useItems, useLocale } from "../../hooks"
+import { useCurrency, useDividents, useItems, useLocale } from "../../hooks"
 
 const ListItem = ({ item }) => {
   const [delShow, setDelShow] = useState(false)
@@ -15,6 +15,7 @@ const ListItem = ({ item }) => {
   const {dividents} = useDividents()
 
   const {t} = useLocale()
+  const {currency} = useCurrency()
 
   useEffect(() => {
     if (item.dividents.length > 0) {
@@ -73,7 +74,7 @@ const ListItem = ({ item }) => {
         <div className="flex flex-col p-6 bg-neutral-100 dark:bg-neutral-700 rounded shadow-md z-50 min-w-[90%] sm:min-w-[25rem]">
           <div>
             <h4 className="font-semibold text-lg capitalize">{t.items.list.item.add_dividents_modal.title} <span className="text-indigo-500 font-extrabold dark:text-indigo-400">{item.name}</span></h4>
-            <p className="text-xs text-neutral-400">{t.items.list.item.add_dividents_modal.subtitle} <span className="text-indigo-500 dark:text-indigo-400 font-medium">{item.price}</span> {t.currency}</p>
+            <p className="text-xs text-neutral-400">{t.items.list.item.add_dividents_modal.subtitle} <span className="text-indigo-500 dark:text-indigo-400 font-medium">{item.price}</span> {currency.symbol}</p>
           </div>
           <div className="my-5">
             <div className="flex flex-col">
@@ -126,7 +127,7 @@ const ListItem = ({ item }) => {
           })}
         </div>
         <div className="flex-none font-mono tracking-tighter py-3 px-2 sm:px-4 font-semibold text-neutral-500 dark:text-neutral-300">
-          {item.price}<span className="font-bold text-neutral-300 dark:text-neutral-500 pl-1 text-xs select-none">{t.currency}</span>
+          {item.price}<span className="font-bold text-neutral-300 dark:text-neutral-500 pl-1 text-xs select-none">{currency.symbol}</span>
         </div>
         <button className="flex-none flex text-neutral-400 text-xl justify-center items-center w-10 sm:w-14 rounded-r transition-100 hover:bg-neutral-100 hover:text-indigo-500" onClick={() => showDividentsModal(item.id)}>
           <MdGroupAdd />

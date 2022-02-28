@@ -4,6 +4,7 @@ import { FaReceipt } from 'react-icons/fa'
 import { useDividents, useItems } from '../hooks'
 import Receipt from "./Receipt"
 import ThemeSwitch from "./ThemeSwitch"
+import CurrencySelect from "./CurrencySelect"
 
 const Header = () => {
   const [receiptModalOpen, setReceiptModalOpen] = useState(false)
@@ -43,8 +44,11 @@ const Header = () => {
             </div>
           </Link>
           <div className='flex-auto' />
-          <div className='flex-none px-8'>
+          <div className='flex-none'>
             <ThemeSwitch />
+          </div>
+          <div className='flex-none px-5'>
+            <CurrencySelect />
           </div>
           <div className='flex items-center flex-none'>
             <button className='text-xl text-neutral-400 transition-100 hover:text-indigo-500 cursor-pointer' onClick={showReceiptModal} aria-label="Open full receipt">

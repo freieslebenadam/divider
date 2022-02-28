@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FaTimes } from "react-icons/fa"
-import { useDividents, useLocale } from '../hooks'
+import { useCurrency, useDividents, useLocale } from '../hooks'
 import { formatPrice } from "../lib"
 import { MdPerson } from "react-icons/md"
 
@@ -9,6 +9,7 @@ const Receipt = ({ receiptModalOpen, hideReceiptModal }) => {
   const {dividents} = useDividents()
 
   const {t} = useLocale()
+  const {currency} = useCurrency()
 
   const dividees = dividents.filter(div => div.total > 0)
 
@@ -42,7 +43,7 @@ const Receipt = ({ receiptModalOpen, hideReceiptModal }) => {
                         <p className='text-sm font-bold capitalize'>{divident.name}</p>
                       </div>
                       <p className='font-mono font-medium tracking-tighter'>
-                        {formatPrice(divident.total)} <span className='text-dim-300 font-bold dark:text-lighter-300'>{t.currency}</span>
+                        {formatPrice(divident.total)} <span className='text-dim-300 font-bold dark:text-lighter-300'>{currency.symbol}</span>
                       </p>
                     </div>
                 ))}
@@ -57,7 +58,7 @@ const Receipt = ({ receiptModalOpen, hideReceiptModal }) => {
             <p className="text-neutral-400 font-medium">{t.receipt.total}</p>
             <div className="font-mono font-medium text-neutral-500">
               <span className="text-indigo-500 dark:text-indigo-400 font-bold">{formatPrice(sumTotal)}</span>
-              <span className="font-medium text-neutral-400 pl-2 select-none">{t.currency}</span>
+              <span className="font-medium text-neutral-400 pl-2 select-none">{currency.symbol}</span>
             </div>
           </div>
           <div className="flex gap-2">
