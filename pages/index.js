@@ -23,7 +23,7 @@ const Home = () => {
   }
 
   return (
-    <section className="container pt-4">
+    <section className="container pt-4 lg:flex lg: lg:flex-row-reverse lg:justify-between lg:gap-4">
       <Head>
         <title>Squer | Divider</title>
         <link rel="shortcut icon" href="/favicon.ico" />
@@ -31,7 +31,7 @@ const Home = () => {
 
       <div style={{display: confirmDeleteModal? "flex": "none"}} className="fixed items-center justify-center top-0 left-0 bottom-0 right-0 animate-fade z-10">
         <div className="absolute z-40 top-0 left-0 w-full h-full bg-dim-500" onClick={closeConfirmDelete} />
-        <div className="flex flex-col p-6 bg-neutral-100 dark:bg-neutral-700 transition-bg-100 rounded shadow-md z-50 w-[65%]">
+        <div className="flex flex-col p-6 bg-neutral-100 dark:bg-neutral-700 transition-bg-100 rounded shadow-md z-50 w-[80%] sm:w-96">
           <div>
             <h4 className="font-bold text-lg">Smazat všechny položky?</h4>
           </div>
@@ -45,12 +45,12 @@ const Home = () => {
         </div>
       </div>
 
-      <article className="p-4 bg-neutral-100 dark:bg-neutral-800 transition-bg-100 rounded shadow mb-2">
+      <article className="p-4 bg-neutral-100 dark:bg-neutral-800 transition-bg-100 rounded shadow mb-2 lg:w-[22rem] lg:h-max">
         {/* DIVIDENTI */}
         <h2 className="font-bold text-lg mb-2 pb-1 border-b border-dim-50 dark:border-lighter-50">Dělitelé</h2>
         <DividentsList />
       </article>
-      <article className="p-4 bg-neutral-100 dark:bg-neutral-800 transition-bg-100 rounded shadow">
+      <article className="p-4 bg-neutral-100 dark:bg-neutral-800 transition-bg-100 rounded shadow lg:flex-auto">
         <h2 className="font-bold text-lg mb-1 pb-1 border-b border-dim-50 dark:border-lighter-50">Přidat položku</h2>
         <AddItemForm />
         <div className="my-6" />
