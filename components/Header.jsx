@@ -39,8 +39,7 @@ const Header = () => {
         <div className="container h-full flex items-center">
           <Link href={`/`} passHref>
             <div className='flex items-center h-full cursor-pointer transition-100 group flex-none'>
-              <h1 className='font-extrabold text-lg border-r-4 border-indigo-500 pr-2'>Sqer</h1>
-              <h2 className='font-extrabold text-xl lowercase pl-2 text-indigo-500 transition-100 group-hover:pl-3'>Divider</h2>
+              <h1 className='font-extrabold text-xl text-indigo-500 dark:text-indigo-400 transition-100 group-hover:pl-3'>Divider</h1>
             </div>
           </Link>
           <div className='flex-auto' />
