@@ -7,11 +7,11 @@ html {
 
 html.light body {
   color: rgb(64 64 64);
-  background-color: rgb(229 229 229);
+  background: linear-gradient(0deg, rgba(229,229,229,1) 0%, rgba(229,229,229,1) 39%, rgba(250,250,250,1) 59%, rgba(250,250,250,1) 100%);
 }
 html.dark body{
   color: rgb(229 229 229);
-  background-color: rgb(23 23 23);
+  background: linear-gradient(0deg, rgba(23,23,23,1) 0%, rgba(23,23,23,1) 39%, rgba(38,38,38,1) 59%, rgba(38,38,38,1) 100%);
 }
 
 ::-webkit-scrollbar {
