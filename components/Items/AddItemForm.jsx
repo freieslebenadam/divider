@@ -37,7 +37,7 @@ const AddItemForm = () => {
   }
 
   return (
-    <form className="flex" onSubmit={handleSubmit} className="w-full flex">
+    <form onSubmit={handleSubmit} className="w-full flex">
       <div className="flex flex-col text-[.7rem] min-w-[7.5rem] font-semibold text-indigo-500 uppercase flex-auto">
         <label htmlFor="itemName" className="pl-1">{t.items.add_form.name_label}</label>
         <input type="text" id="itemName"
@@ -61,8 +61,9 @@ const AddItemForm = () => {
           tabIndex={0}
           spellCheck="false"
           autoComplete="off"
+          pattern="([0-9]|,|\.)*"
           required
-
+          inputMode="decimal"
         />
       </div>
       <div className="flex flex-col text-[.7rem] font-semibold text-transparent uppercase flex-none">
