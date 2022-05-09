@@ -50,7 +50,7 @@ const Home = () => {
   return (
     <section className="container pt-4 lg:flex lg: lg:flex-row-reverse lg:justify-between lg:gap-4">
       <Head>
-        <title>Squer | Divider</title>
+        <title>Divider</title>
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
 
